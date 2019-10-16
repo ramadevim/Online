@@ -1,0 +1,108 @@
+Commands:-(Tag products to search)
+----------
+C:\Users\SIF-5371\django proj\onlineshopp>python manage.py shell
+Python 3.6.7 (v3.6.7:6ec5cf24b7, Oct 20 2018, 13:35:33) [MSC v.1900 64 bit (AMD6
+4)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from search.models import Tag
+>>> Tag.objects.all()
+<QuerySet [<Tag: T-shirts>, <Tag: black>]>
+>>> black.Product.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'black' is not defined
+>>> black=Tag.object.last()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'Tag' has no attribute 'object'
+>>> Tag.objects.last()
+<Tag: black>
+>>> black.Product
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'black' is not defined
+>>> black.product
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'black' is not defined
+>>> Tag.objects.all()
+<QuerySet [<Tag: T-shirts>, <Tag: black>]>
+>>> black=Tag.objects.last()
+>>> black.title
+'black'
+>>> black.Product
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Tag' object has no attribute 'Product'
+>>> black.product
+<django.db.models.fields.related_descriptors.create_forward_many_to_many_manager
+.<locals>.ManyRelatedManager object at 0x0000000003EC6358>
+>>> black.product.all()
+<QuerySet [<Product: kurthis>, <Product: shirts>, <Product: T-shrit>]>
+>>> black.product.all().first()
+<Product: kurthis>
+>>> exit()
+
+C:\Users\SIF-5371\django proj\onlineshopp>python manage.py shell
+Python 3.6.7 (v3.6.7:6ec5cf24b7, Oct 20 2018, 13:35:33) [MSC v.1900 64 bit (AMD6
+4)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from product.models import Product
+>>> qs=Product.objects.all()
+>>> qs
+<QuerySet [<Product: kurthis>, <Product: hat>, <Product: shirts>, <Product: T-sh
+rit>]>
+>>> kurthis=qs.first()
+>>> kurthis
+<Product: kurthis>
+>>> T-shirt=qs.last()
+  File "<console>", line 1
+SyntaxError: can't assign to operator
+>>> kurthis=qs.first()
+>>> kurthis
+<Product: kurthis>
+>>> tshirt.Tag_set
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'tshirt' is not defined
+>>> T-shirt.Tag_set
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'T' is not defined
+>>> kurthis.tag_set
+<django.db.models.fields.related_descriptors.create_forward_many_to_many_manager
+.<locals>.ManyRelatedManager object at 0x0000000003EDE470>
+>>> T-shirt.tag_set
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'T' is not defined
+>>> kurthis.tag_set
+<django.db.models.fields.related_descriptors.create_forward_many_to_many_manager
+.<locals>.ManyRelatedManager object at 0x0000000003EBB5C0>
+>>> kurthis.tag_set(title__iexact='black')
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+TypeError: __call__() got an unexpected keyword argument 'title__iexact'
+>>> kurthis.tag_set(title__iexact='Black')
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+TypeError: __call__() got an unexpected keyword argument 'title__iexact'
+>>> kurthis.tag_set.filter(title__iexact='Black')
+<QuerySet [<Tag: black>]>
+>>> tshirt.tag_set
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'tshirt' is not defined
+>>> tshirt.tag_set
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'tshirt' is not defined
+>>> tshirt=qs.first()
+>>> tshirt.tag_set
+<django.db.models.fields.related_descriptors.create_forward_many_to_many_manager
+.<locals>.ManyRelatedManager object at 0x0000000003EBB5C0>
+>>> tshirt.tag_set.filter(title__iexact='Black')
+<QuerySet [<Tag: black>]>
+>>>

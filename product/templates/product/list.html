@@ -1,0 +1,39 @@
+{%extends 'base.html'%}
+{% load static %}
+    {% block styles %}
+
+      <style>
+          body {
+            border-top: 4px solid #E47541;
+            /*min-height: 5000px;*/
+            /*min-width: 5000px;*/
+            background: url('{% static "pic.jpg" %}') no-repeat center center fixed;
+             -webkit-background-size: cover;
+             -moz-background-size: cover;
+             -o-background-size: conver;
+            background-size: cover;
+            /*background-image: url('{% static "img/beach.jpg" %}');*/
+            /*background-image:url('https://lh4.googleusercontent.com/-FsgMNhfQLSg/AAAAAAAAAAI/AAAAAAAAaRY/3VnF3vSuWKk/photo.jpg');*/
+            /*background-repeat: repeat-x;*/
+          }
+      </style>
+   {% endblock %}
+
+{%block content%}
+  <div class="row">
+    {% for obj in object_list%}
+         <div class="col">
+             <div class="col-md-4">
+                 <div class="thumbnail">
+              <a href="{{ product.get_absolute_url }}">
+                 <img src="{% if obj.image %} {{ obj.image.url }} {% else %} {% static 'img/default.jpg' %} {% endif %}" alt="..." style="height: 130px; width: auto">
+              </a>
+                     <a href="{{obj.get_absolute_url}}" >{{obj.title}}</a>
+                 </div>
+             </div>
+         </div>
+
+
+    {% endfor %}
+  </div>
+{%endblock%}

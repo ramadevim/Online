@@ -1,0 +1,29 @@
+{%load staticfiles%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% block styles %}
+
+      <style>
+          body {
+            border-top: 4px solid #E47541;
+            /*min-height: 5000px;*/
+            /*min-width: 5000px;*/
+            background: url('{% static "pic.jpg" %}') no-repeat center center fixed;
+             -webkit-background-size: cover;
+             -moz-background-size: cover;
+             -o-background-size: conver;
+            background-size: cover;
+            /*background-image: url('{% static "img/beach.jpg" %}');*/
+            /*background-image:url('https://lh4.googleusercontent.com/-FsgMNhfQLSg/AAAAAAAAAAI/AAAAAAAAaRY/3VnF3vSuWKk/photo.jpg');*/
+            /*background-repeat: repeat-x;*/
+          }
+      </style>
+   {% endblock %}
+</head>
+<body>
+<!--<h1>Hello Ramasai</h1>-->
+<!--<img src="{%static 'pic.jpg'%}" alt="image" />-->
+</body>
+</html>

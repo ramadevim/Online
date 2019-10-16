@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    {{ product.name }}
+{% endblock %}
+ {% block styles %}
+
+      <style>
+          body {
+            border-top: 4px solid #E47541;
+            /*min-height: 5000px;*/
+            /*min-width: 5000px;*/
+            background: url('{% static 'pic.jpg' %}') no-repeat center center fixed;
+             -webkit-background-size: cover;
+             -moz-background-size: cover;
+             -o-background-size: conver;
+            background-size: cover;
+            /*background-image: url('{% static "img/beach.jpg" %}');*/
+            /*background-image:url('https://lh4.googleusercontent.com/-FsgMNhfQLSg/AAAAAAAAAAI/AAAAAAAAaRY/3VnF3vSuWKk/photo.jpg');*/
+            /*background-repeat: repeat-x;*/
+          }
+      </style>
+ {% endblock %}
+
+{% block content %}
+    <div class="product-detail">
+        <img style="width: 250px" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'shop/no_image.png' %}{% endif %}" height="300"/>
+        <h1 style="color:white">{{ product.title }}</h1>
+        <p style="color:white">${{ product.price }}</p>
+            <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                {{cart_add_form}}
+                {% csrf_token %}
+                <input type="submit" value="Add to cart">
+            </form>
+        <h3 style="color:white">{{ product.desc|linebreaks }}</h3>
+    </div>
+{% endblock %}

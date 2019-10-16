@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Your shopping cart
+{% endblock %}
+ {% block styles %}
+
+      <style>
+          body {
+            border-top: 4px solid #E47541;
+            /*min-height: 5000px;*/
+            /*min-width: 5000px;*/
+            background: url('{% static 'pic.jpg' %}') no-repeat center center fixed;
+             -webkit-background-size: cover;
+             -moz-background-size: cover;
+             -o-background-size: conver;
+            background-size: cover;
+            /*background-image: url('{% static "img/beach.jpg" %}');*/
+            /*background-image:url('https://lh4.googleusercontent.com/-FsgMNhfQLSg/AAAAAAAAAAI/AAAAAAAAaRY/3VnF3vSuWKk/photo.jpg');*/
+            /*background-repeat: repeat-x;*/
+          }
+      </style>
+ {% endblock %}
+{% block content %}
+    <!--<video controls>-->
+      <!--<source src="movie.mp4" type="video/mp4">-->
+      <!--Your browser does not support the html video tag.-->
+    <!--</video>-->
+    <h1>Your shopping cart</h1>
+    <table class="cart" cellspacing="5">
+        <thead>
+            <tr>
+                <th style="color:white">Image</th>
+                <th style="color:white">Product</th>
+                <th>Quantity</th>
+                <th>Remove</th>
+                <th>Unit price</th>                
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in cart %}
+            {% with product=item.product %}
+            <tr>
+                <td>
+                    <a href="{{ product.get_absolute_url }}">
+                        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'product/no_image.png' %}{% endif %}" width="200" height="200"/>
+                    </a>
+                </td>
+                <td>{{ product.name }}</td>
+                <td>
+                    <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                        {{ item.update_quantity_form.quantity }}
+                        {{ item.update_quantity_form.update }}
+                        <input type="submit" value="Update">
+                        {% csrf_token %}
+                    </form>
+                </td>
+                <td><a href="{% url 'cart:cart_remove' product.id %}">Remove</a></td>
+                <td class="num">${{ item.price }}</td>
+                <td class="num">${{ item.total_price }}</td>
+            </tr>
+            {% endwith %}
+        {% endfor %}
+        <tr class="total">
+            <td style="color:white">Total</td>
+            <td colspan="4"></td>
+            <td class="num">${{ cart.get_total_price }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <p class="text-right">
+        <a href="{% url 'product:list' %}" class="button light">Continue shopping</a>
+        <a href="{% url 'orders:order_create' %}" class="button light">Checkout</a>
+
+    </p>
+{% endblock %}
